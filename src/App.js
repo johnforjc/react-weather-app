@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./component/Header";
+import Weather from "./component/Weather";
+import Forms from "./component/Forms";
+import { useState } from "react";
+
+// dt * 1000 untuk convertnya
 
 function App() {
+  const [Location, setLocation] = useState("");
+  const [Info, setInfo] = useState("");
+
+  const getInfo = async (input) => {
+    // Fetch API from openweather API
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=d44552c54bc9e85447b8b979b11a77d9`;
+    let data = await fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((responseJson) => {
+        return responseJson;
+      })
+      .catch(() => {
+        setLocation("Location not found");
+        return "Location not Found";
+      });
+    console.log(data);
+
+    if (data !== "Location not Found") {
+      let city = data.name;
+      let country = data.sys.country;
+
+      let thisLocation = city + ", " + country;
+      console.log(thisLocation);
+
+      setLocation(thisLocation);
+    }
+
+    setInfo(data);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <Forms getInfo={getInfo}></Forms>
+      <Weather Location={Location} Info={Info}></Weather>
     </div>
   );
 }
