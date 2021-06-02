@@ -26,7 +26,7 @@ function App() {
       })
       .catch(() => {
         setLocation("Location not found");
-        return "Location not found";
+        return "";
       });
     console.log(data);
 

@@ -4,7 +4,15 @@ import Infos from "./Infos";
 
 const Weather = ({ Location, Info }) => {
   console.log(Info);
-  if (Info == "") {
+  if (Location == "Location not found") {
+    return (
+      <div className="weatherBox">
+        <div className="geografis-info">
+          <h3>{Location}</h3>
+        </div>
+      </div>
+    );
+  } else if (Info == "") {
     return <div className="weatherBox"></div>;
   } else {
     return (

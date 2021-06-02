@@ -6,7 +6,7 @@ const Form = ({ getInfo }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    console.log(Location);
     getInfo(Location);
   };
 
