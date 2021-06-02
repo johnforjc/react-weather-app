@@ -1,0 +1,11 @@
+.weather-detail {
+  text-transform: capitalize;
+}
+
+.infochild {
+  display: flex;
+}
+
+.infochild .label-info {
+  width: 50%;
+}

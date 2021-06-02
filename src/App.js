@@ -12,7 +12,7 @@ function App() {
 
   const getInfo = async (input) => {
     // Fetch API from openweather API
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=d44552c54bc9e85447b8b979b11a77d9`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=d44552c54bc9e85447b8b979b11a77d9`;
     let data = await fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -26,11 +26,12 @@ function App() {
       })
       .catch(() => {
         setLocation("Location not found");
-        return "Location not Found";
+        return "Location not found";
       });
     console.log(data);
 
-    if (data !== "Location not Found") {
+    // Set Location Format : City, ID of Country
+    if (data !== "") {
       let city = data.name;
       let country = data.sys.country;
 
